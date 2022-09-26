@@ -38,6 +38,7 @@ import android.net.NetworkCapabilities;
 import android.net.NetworkRequest;
 import android.net.util.SharedLog;
 import android.os.Handler;
+import android.provider.Settings;
 import android.util.Log;
 import android.util.SparseIntArray;
 
@@ -54,8 +55,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
-
-import lineageos.providers.LineageSettings;
 
 
 /**
@@ -330,8 +329,8 @@ public class UpstreamNetworkMonitor {
     public UpstreamNetworkState getCurrentPreferredUpstream() {
         // Use VPN upstreams if hotspot settings allow.
         if (mVpnInternetNetwork != null &&
-                LineageSettings.Secure.getInt(mContext.getContentResolver(),
-                        LineageSettings.Secure.TETHERING_ALLOW_VPN_UPSTREAMS, 0) == 1) {
+                Settings.Secure.getInt(mContext.getContentResolver(),
+                        Settings.Secure.TETHERING_ALLOW_VPN_UPSTREAMS, 0) == 1) {
             return mNetworkMap.get(mVpnInternetNetwork);
         }
         final UpstreamNetworkState dfltState = (mDefaultInternetNetwork != null)
