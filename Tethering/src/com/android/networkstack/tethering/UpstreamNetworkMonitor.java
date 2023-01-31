@@ -86,6 +86,9 @@ public class UpstreamNetworkMonitor {
     private static final boolean DBG = false;
     private static final boolean VDBG = false;
 
+    // Copied from core/java/android/provider/Settings.java
+    private static final String TETHERING_ALLOW_VPN_UPSTREAMS = "tethering_allow_vpn_upstreams";
+
     public static final int EVENT_ON_CAPABILITIES   = 1;
     public static final int EVENT_ON_LINKPROPERTIES = 2;
     public static final int EVENT_ON_LOST           = 3;
@@ -330,7 +333,7 @@ public class UpstreamNetworkMonitor {
         // Use VPN upstreams if hotspot settings allow.
         if (mVpnInternetNetwork != null &&
                 Settings.Secure.getInt(mContext.getContentResolver(),
-                        Settings.Secure.TETHERING_ALLOW_VPN_UPSTREAMS, 0) == 1) {
+                        TETHERING_ALLOW_VPN_UPSTREAMS, 0) == 1) {
             return mNetworkMap.get(mVpnInternetNetwork);
         }
         final UpstreamNetworkState dfltState = (mDefaultInternetNetwork != null)

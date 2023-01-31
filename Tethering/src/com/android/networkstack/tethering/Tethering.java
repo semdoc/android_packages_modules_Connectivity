@@ -173,6 +173,9 @@ public class Tethering {
     private static final boolean DBG = false;
     private static final boolean VDBG = false;
 
+    // Copied from core/java/android/provider/Settings.java
+    private static final String TETHERING_ALLOW_VPN_UPSTREAMS = "tethering_allow_vpn_upstreams";
+
     private static final Class[] sMessageClasses = {
             Tethering.class, TetherMainSM.class, IpServer.class
     };
@@ -461,7 +464,7 @@ public class Tethering {
             }
         };
         mContext.getContentResolver().registerContentObserver(Settings.Secure.getUriFor(
-                Settings.Secure.TETHERING_ALLOW_VPN_UPSTREAMS), false, vpnSettingObserver);
+                TETHERING_ALLOW_VPN_UPSTREAMS), false, vpnSettingObserver);
     }
 
     private class TetheringThreadExecutor implements Executor {
